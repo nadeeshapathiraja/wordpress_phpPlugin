@@ -87,7 +87,7 @@ button:hover {
 </style>
 <body>
 
-<form id="regForm" method="post" action="#">
+<form id="regForm" method="post" name="rideDetails" action="#">
 
   <h1>Ride Details</h1>	
   <!-- One "tab" for each step in the form: -->
@@ -373,10 +373,20 @@ button:hover {
                 <script type="text/javascript">
 
                     function ClickButton() {
-                        $("#allData").click(function() {
-                            alert("test");
-                        });
+
+                      var a = document.forms["rideDetails"]["selectVehical"].value;
+                      
+                      if (a == null || a == "") {
+                        alert("Please Select vehical");
+                        alert("Please Make Sure You submit All Data...!!!");
+                        return false;
+                      }
                     }
+                    // function ClickButton() {
+                    //     $("#allData").click(function() {
+                    //         alert("Are You Sure You Enter Correct Data?");
+                    //     });
+                    // }
 
                 </script>
             
@@ -387,13 +397,9 @@ button:hover {
 
     </div>
  </div>
-  
-</div>
+ <!-- Page 4 end -->
 
-   
 
-  </div>
-  <!-- Page 4 end -->
 
 
   <!-- Common -->
@@ -539,76 +545,3 @@ button:hover {
 
     }
 ?>
-
-<script type="text/javascript">
-
-function checkForm(form)
-{
-  // regular expression to match required date format
-  re = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
-
-  if(form.startdate.value != '') {
-    if(regs = form.startdate.value.match(re)) {
-      // day value between 1 and 31
-      if(regs[1] < 1 || regs[1] > 31) {
-        alert("Invalid value for day: " + regs[1]);
-        form.startdate.focus();
-        return false;
-      }
-      // month value between 1 and 12
-      if(regs[2] < 1 || regs[2] > 12) {
-        alert("Invalid value for month: " + regs[2]);
-        form.startdate.focus();
-        return false;
-      }
-      // year value between 1902 and 2019
-      if(regs[3] < 1902 || regs[3] > (new Date()).getFullYear()) {
-        alert("Invalid value for year: " + regs[3] + " - must be between 1902 and " + (new Date()).getFullYear());
-        form.startdate.focus();
-        return false;
-      }
-    } else {
-      alert("Invalid date format: " + form.startdate.value);
-      form.startdate.focus();
-      return false;
-    }
-  }
-
-  // regular expression to match required time format
-  re = /^(\d{1,2}):(\d{2})([ap]m)?$/;
-
-  if(form.starttime.value != '') {
-    if(regs = form.starttime.value.match(re)) {
-      if(regs[3]) {
-        // 12-hour value between 1 and 12
-        if(regs[1] < 1 || regs[1] > 12) {
-          alert("Invalid value for hours: " + regs[1]);
-          form.starttime.focus();
-          return false;
-        }
-      } else {
-        // 24-hour value between 0 and 23
-        if(regs[1] > 23) {
-          alert("Invalid value for hours: " + regs[1]);
-          form.starttime.focus();
-          return false;
-        }
-      }
-      // minute value between 0 and 59
-      if(regs[2] > 59) {
-        alert("Invalid value for minutes: " + regs[2]);
-        form.starttime.focus();
-        return false;
-      }
-    } else {
-      alert("Invalid time format: " + form.starttime.value);
-      form.starttime.focus();
-      return false;
-    }
-  }
-
-  alert("All input fields have been validated!");
-  return true;
-}
-
-</script>
