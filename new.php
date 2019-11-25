@@ -25,9 +25,6 @@ body {
   width: 500px;
 }
 
-h1 {
-  text-align: center;  
-}
 
 input {
   padding: 10px;
@@ -76,6 +73,42 @@ button:hover {
   opacity: 0.5;
 }
 
+/* new update  */
+label {
+    display: block;
+    margin-bottom: 5px
+}
+label i {
+    color: #999;
+    font-size: 80%;
+}
+input, select {
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+.row {
+    padding-bottom: 10px;
+}
+.form-inline {
+    border: 1px solid #ccc;
+    padding: 8px 10px 4px;
+    border-radius: 2px;
+}
+.form-inline label, .form-inline input {
+    display: inline-block;
+    width: auto;
+    padding-right: 15px;
+}
+.error {
+    color: red;
+    font-size: 90%;
+}
+/*end New Updates */
+
 .step.active {
   opacity: 1;
 }
@@ -87,9 +120,9 @@ button:hover {
 </style>
 <body>
 
-<form id="regForm" method="post" name="rideDetails" action="#">
+<form id="regForm" method="post" name="rideDetails" onsubmit="return validateForm()" action="http://yayataxis.com/request-for-quote/">
 
-  <h1>Ride Details</h1>	
+  <h1 style="text-align: center;">Ride Details</h1>	
   <!-- One "tab" for each step in the form: -->
 
 
@@ -107,10 +140,31 @@ button:hover {
     <label>Pickup Location</label>
     
         <select class="form-control" name="pickUpLocation" id="pickUpLocation">
+                <option value="Ampara">Ampara</option>
+                <option value="Anuradhapura">Anuradhapura</option>
+                <option value="Badulla">Badulla</option>
+                <option value="Batticaloa">Batticaloa</option>
                 <option value="Colombo">Colombo</option>
-                <option value="Jaffna">Jaffna</option>
-                <option value="Mathtara">Mathtara</option>
-                <option value="Kaluthara">Kaluthara</option>
+                <option value="Galle">Galle</option>
+                <option value="	Gampaha">Gampaha</option>
+                <option value="	Jaffna">Jaffna</option>
+                <option value="	Kalutara">Kalutara</option>
+                <option value="Kandy">Kandy</option>
+                <option value="Kegalle">Kegalle</option>
+                <option value="Kilinochchi">Kilinochchi</option>
+                <option value="Kurunegala">Kurunegala</option>
+                <option value="Mannar">	Mannar</option>
+                <option value="Matale">Matale</option>
+                <option value="Matara">Matara</option>
+                <option value="Monaragala">Monaragala</option>
+                <option value="Mullaitivu">Mullaitivu</option>
+                <option value="Nuwara Eliya">Nuwara Eliya</option>
+                <option value="Polonnaruwa">Polonnaruwa</option>
+                <option value="Puttalam">Puttalam</option>
+                <option value="Ratnapura">Ratnapura</option>
+                <option value="Trincomalee">Trincomalee</option>
+                <option value="Vavuniya">Vavuniya</option>
+
         </select>
     </p>
 
@@ -118,10 +172,32 @@ button:hover {
       <label>Drop Off Location</label>
             
           <select class="form-control" name="dorpOffLocation" id="dorpOffLocation">
-              <option value="Galle">Galle</option>
-              <option value="Katharagama">Katharagama</option>
-              <option value="Bandarawela">Bandarawela</option>
-              <option value="Ella">Ella</option>
+
+                <option value="Ampara">Ampara</option>
+                <option value="Anuradhapura">Anuradhapura</option>
+                <option value="Badulla">Badulla</option>
+                <option value="Batticaloa">Batticaloa</option>
+                <option value="Colombo">Colombo</option>
+                <option value="Galle">Galle</option>
+                <option value="	Gampaha">Gampaha</option>
+                <option value="	Jaffna">Jaffna</option>
+                <option value="	Kalutara">Kalutara</option>
+                <option value="Kandy">Kandy</option>
+                <option value="Kegalle">Kegalle</option>
+                <option value="Kilinochchi">Kilinochchi</option>
+                <option value="Kurunegala">Kurunegala</option>
+                <option value="Mannar">	Mannar</option>
+                <option value="Matale">Matale</option>
+                <option value="Matara">Matara</option>
+                <option value="Monaragala">Monaragala</option>
+                <option value="Mullaitivu">Mullaitivu</option>
+                <option value="Nuwara Eliya">Nuwara Eliya</option>
+                <option value="Polonnaruwa">Polonnaruwa</option>
+                <option value="Puttalam">Puttalam</option>
+                <option value="Ratnapura">Ratnapura</option>
+                <option value="Trincomalee">Trincomalee</option>
+                <option value="Vavuniya">Vavuniya</option>
+
           </select>
     </p>
      
@@ -251,28 +327,35 @@ button:hover {
   <!-- Page 3 Start -->
   <div class="tab">
     <h2>Contact Details</h2>
-
+    
     <div>
       <div class="row" style="margin-top: 30px;">
         <div class="col-md-6">
           <label>First Name</label>
           <input name="firstname" type="text" class="form-control">
+          <span class="error">* <?php echo $nameErr;?></span>
         </div>
         <div class="col-md-6">
           <label>Last Name</label>
           <input name="lastname" type="text" class="form-control">
+          <span class="error">* <?php echo $nameErr;?></span>
         </div>  
       </div>
       <div class="row">
+
         <div class="col-md-6">
           <label>Email</label>
-          <input name="email" type="text" class="form-control">
+          <input name="email" type="email" placeholder="Ex:example@gmail.com" class="form-control">
+          <span class="error">* <?php echo $emailErr;?></span>
         </div>
         <div class="col-md-6">
           <label>Phone</label>
-          <input name="phone" type="text" class="form-control">
-        </div>  
+          <input name="phone" type="tel" pattern="[0-9]{10}" placeholder="Ex:0768352207" class="form-control">
+          <span class="error">* <?php echo $phoneErr;?></span>
+        </div> 
+        
       </div>
+
       <div class="row">
         <div class="col-md-6">
           <label>Country</label>
@@ -337,7 +420,7 @@ button:hover {
             </div>
 
             <div class="col-md-1">
-              <input type="radio" class="custom-control-input" id="cardpayment" value="Card Payment" name="payment" checked>
+              <input type="radio" class="custom-control-input" id="cardpayment" value="CardPayment" name="payment" checked>
             </div>
 
             <div class="col-md-3">
@@ -353,7 +436,7 @@ button:hover {
             </div>
 
             <div class="col-md-1">
-              <input type="radio" class="custom-control-input" id="cashpayment" value="Cash Payment" name="payment">
+              <input type="radio" class="custom-control-input" id="cashpayment" value="CashPayment" name="payment">
             </div>
 
             <div class="col-md-3"></div>
@@ -378,15 +461,11 @@ button:hover {
                       
                       if (a == null || a == "") {
                         alert("Please Select vehical");
-                        alert("Please Make Sure You submit All Data...!!!");
                         return false;
                       }
+
                     }
-                    // function ClickButton() {
-                    //     $("#allData").click(function() {
-                    //         alert("Are You Sure You Enter Correct Data?");
-                    //     });
-                    // }
+
 
                 </script>
             
@@ -417,7 +496,7 @@ button:hover {
     <span class="step"></span>
     <span class="step"></span>
     <span class="step"></span>
-   <!--  <span class="step"></span> -->
+    <span class="step"></span>
   </div>
 
   <script>history.pushState({}, "", "")</script>
@@ -445,7 +524,7 @@ button:hover {
           if (n == (x.length - 1)) {
             document.getElementById("nextBtn").style.display = "none";;
           } else {
-            document.getElementById("nextBtn").innerHTML = "Next";
+            document.getElementById("nextBtn").style.display = "inline";
           }
           //... and run a function that will display the correct step indicator:
 
@@ -507,41 +586,3 @@ button:hover {
 
   </body>
 </html>
-
-<?php
-    if (isset($_REQUEST["submit"])){
-       
-             $firstname=$_REQUEST['firstname'];
-             $lastname=$_REQUEST['lastname'];
-             $email=$_REQUEST['email'];
-             $phone=$_REQUEST['phone'];
-             $country=$_REQUEST['country'];
-             $passportId=$_REQUEST['passportId'];
-             $comments=$_REQUEST['comments'];
-             $pickupdate=$_REQUEST['pickupdate'];
-             $pickuptime=$_REQUEST['pickuptime'];
-             $pickUpLocation=$_REQUEST['pickUpLocation'];
-             $dorpOffLocation=$_REQUEST['dorpOffLocation'];
-             $payment=$_REQUEST['payment'];      
-             $pasengers=$_REQUEST['pasengers'];
-             $suitcases=$_REQUEST['suitcases'];
-             $vehical=$_REQUEST['selectVehical'];
-
-             
-
-        $to="pdncpathiraja95@gmail.com";
-        $subject="Add Ride";
-        $message="Full Name: ".$firstname. " ".$lastname."\n"."E-mail: ".$email."\n"."Phone : ".$phone."\n"."Country: ".$country."\n"."Passport Id: ".$passportId."\n"."Comments: ".$comments."\n"
-        ."PickUp Date: ".$pickupdate."\n"."Pickup Time: ".$pickuptime."\n"."PickUp Location: ".$pickUpLocation."\n"."Drop Off Location: ".$dorpOffLocation."\n"."Payment Method: ".$payment."\n"."Number Of Pasengers: ".$pasengers."\n"."Number of Suitcases: ".$suitcases."\n"
-        ."Vehical Type: ".$vehical."\n";
-        $headers="From : nadeesha@gmail.com";
-
-        if(mail($to,$subject,$message,$headers)){
-            echo "<h2>Email Sent Successfully! Thank You</h2>";
-        }
-        else{
-            echo "Someting Went Wrong";
-        }
-
-    }
-?>
