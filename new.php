@@ -130,8 +130,43 @@ input, select {
   <div class="tab">
     <h2>Ride Details</h2>
 
+    
+
     <label>Pickup Date</label>
-    <p><input type="date" oninput="this.className = ''" name="pickupdate"></p>
+
+    <p><input type="text" oninput="this.className = ''" id="date" placeholder="DD/MM/YYYY" onkeyup="checkDate()" name="pickupdate"> (Today:  <?php echo date("d/m/y");?>)</p>  
+    <div id="datewarn"></div> 
+
+    <script>
+      function isFutureDate(idate){
+          var today = new Date().getTime(),
+              idate = idate.split("/");
+          
+          idate = new Date(idate[2], idate[1] - 1, idate[0]).getTime();
+          return (today - idate) >= 0 ? true : false;
+      }
+
+        // your function
+        function checkDate(){
+            var idate = document.getElementById("date"),
+                resultDiv = document.getElementById("datewarn"),
+                dateReg = /(0[1-9]|[12][0-9]|3[01])[\/](0[1-9]|1[012])[\/]|20[1-9][0-9]/;
+            
+            if(dateReg.test(idate.value)){
+                if(isFutureDate(idate.value)){
+                    resultDiv.innerHTML = "Please Entere the future date";
+                    resultDiv.style.color = "red";
+                } else {
+                    resultDiv.innerHTML = "It's a valid date";
+                    resultDiv.style.color = "green";
+                }
+            } else {
+                resultDiv.innerHTML = "Invalid date!";
+                resultDiv.style.color = "red";
+            }
+        }
+    </script>
+
 
     <label>Pickup time</label>
     <p><input type="time" oninput="this.className = ''" name="pickuptime"></p>
@@ -329,31 +364,28 @@ input, select {
     <h2>Contact Details</h2>
     
     <div>
+
       <div class="row" style="margin-top: 30px;">
         <div class="col-md-6">
           <label>First Name</label>
-          <input name="firstname" type="text" class="form-control">
-          <span class="error">* <?php echo $nameErr;?></span>
+          <input name="firstname" type="text" class="form-control">  
         </div>
         <div class="col-md-6">
           <label>Last Name</label>
           <input name="lastname" type="text" class="form-control">
-          <span class="error">* <?php echo $nameErr;?></span>
         </div>  
       </div>
-      <div class="row">
 
+      <div class="row">
         <div class="col-md-6">
           <label>Email</label>
           <input name="email" type="email" placeholder="Ex:example@gmail.com" class="form-control">
-          <span class="error">* <?php echo $emailErr;?></span>
         </div>
+
         <div class="col-md-6">
           <label>Phone</label>
           <input name="phone" type="tel" pattern="[0-9]{10}" placeholder="Ex:0768352207" class="form-control">
-          <span class="error">* <?php echo $phoneErr;?></span>
-        </div> 
-        
+        </div>    
       </div>
 
       <div class="row">
@@ -496,7 +528,7 @@ input, select {
     <span class="step"></span>
     <span class="step"></span>
     <span class="step"></span>
-    <span class="step"></span>
+    <!-- <span class="step"></span> -->
   </div>
 
   <script>history.pushState({}, "", "")</script>
