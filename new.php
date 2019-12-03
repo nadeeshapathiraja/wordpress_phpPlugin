@@ -89,10 +89,10 @@ button:hover {
 <div class="row" >
 <div class="col-md-3"></div>
   <div class="col-md-6 col-sm-2">
-    <div class="Jumbotron"
+    <div class="Jumbotron">
 
     
-        <form id="regForm" method="post" name="rideDetails" onSubmit="if(!confirm('Is the Email and Phone Number filled correctly?')){return false;}" action="http://yayataxis.com/request-for-quote/">
+      <form id="regForm" method="post" name="rideDetails" onSubmit="if(!confirm('Is the Email and Phone Number filled correctly?')){return false;}" action="http://yayataxis.com/request-for-quote/">
 
             <h1 style="text-align: center;">Ride Details</h1>	
             <!-- One "tab" for each step in the form: -->
@@ -495,6 +495,8 @@ button:hover {
   <div class="col-md-3"></div>
 
 </div>
+
+
 
   <script>
 
