@@ -1,19 +1,111 @@
+<!-- After Press Booking Button -->
+<?php
+
+    if (isset($_REQUEST["booking"])){
+//  session_start();
+
+        $firstname=$_REQUEST['firstname'];
+        $lastname=$_REQUEST['lastname'];
+        $email=$_REQUEST['email'];
+        $phone=$_REQUEST['phone'];
+        $country=$_REQUEST['country'];
+        $passportId=$_REQUEST['passportId'];
+        $comments=$_REQUEST['comments'];
+        $pickupdate=$_REQUEST['pickupdate'];
+        $pickuptime=$_REQUEST['pickuptime'];
+        $pickUpLocation=$_REQUEST['pickUpLocation'];
+        $dorpOffLocation=$_REQUEST['dorpOffLocation'];
+        $payment=$_REQUEST['payment'];      
+        $pasengers=$_REQUEST['pasengers'];
+        $suitcases=$_REQUEST['suitcases'];
+        $vehicle=$_REQUEST['vehicle'];
+
+		//header("Location: http://yayataxis.com/complete-submit/");
+		
+        $to="kushani.ceilanco@gmail.com";
+        $subject="Book Ride";
+        $message="This Persion Book Our Vehicle \n\n"."Full Name: ".$firstname. " ".$lastname."\n"."Phone : ".$phone."\n"."Passport Id: ".$passportId."\n";
+		    $headers="From : $email";
+		
+		// if($email !=''&& $phone !=''&& $passportId !='')
+		// {
+		// 	//  To redirect form on a particular page
+		// 	header("Location:http://yayataxis.com/complete-submit/");
+		// }
+		//window.open(“www.yayataxis.com/complete-submit/”);
+		
+		
+
+        if(mail($to,$subject,$message,$headers)){
+            echo "<h2 style='text-aligan: center;'>Email Sent Successfully! Thank You</h2>";
+        }
+        else{
+            echo "Someting Went Wrong";
+		}
+		
+		
+
+		unset($_REQUEST["booking"]);
+    }
+?>
+
+<!-- Cancle button -->
+<?php
+
+    if (isset($_REQUEST["cancle"])){
+//  session_start();
+
+        $firstname=$_REQUEST['firstname'];
+        $lastname=$_REQUEST['lastname'];
+        $email=$_REQUEST['email'];
+        $phone=$_REQUEST['phone'];
+        $country=$_REQUEST['country'];
+        $passportId=$_REQUEST['passportId'];
+        $comments=$_REQUEST['comments'];
+        $pickupdate=$_REQUEST['pickupdate'];
+        $pickuptime=$_REQUEST['pickuptime'];
+        $pickUpLocation=$_REQUEST['pickUpLocation'];
+        $dorpOffLocation=$_REQUEST['dorpOffLocation'];
+        $payment=$_REQUEST['payment'];      
+        $pasengers=$_REQUEST['pasengers'];
+        $suitcases=$_REQUEST['suitcases'];
+        $vehicle=$_REQUEST['vehicle'];
+
+
+        $to="kushani.ceilanco@gmail.com";
+        $subject="Cancle Ride";
+        $message="This Persion Cancle booking \n\n"."Full Name: ".$firstname. " ".$lastname."\n"."Phone : ".$phone."\n"."Passport Id: ".$passportId."\n";
+		$headers="From : $email";
+		
+        if(mail($to,$subject,$message,$headers)){
+            echo "<h2>You Cancle your Ride</h2>";
+        }
+        else{
+            echo "Someting Went Wrong";
+		}
+		
+		//window.location.replace('http://yayataxis.com/my-booking-info');
+		//window.open(“www.yayataxis.com/my-booking-info”);
+		//header("Location: www.yayataxis.com/my-booking-info/");
+		
+    }
+?>
 
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<!-- <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
+
 * {
   box-sizing: border-box;
 }
 
 body {
   background-color: #f1f1f1;
-
 }
 
 #regForm {
@@ -25,6 +117,7 @@ body {
   min-width: 300px;
   width: 500px;
 }
+
 
 
 input {
@@ -62,6 +155,7 @@ button:hover {
   background-color: #bbbbbb;
 }
 
+
 /* Make circles that indicate the steps of the form: */
 .step {
   height: 15px;
@@ -72,6 +166,11 @@ button:hover {
   border-radius: 50%;
   display: inline-block;
   opacity: 0.5;
+}
+#regForm .nameh1{
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
 }
 
 
@@ -84,7 +183,7 @@ button:hover {
   background-color: #4CAF50;
 }
 </style>
-<body>
+<body onload='document.rideDetails.email.focus()'>
 
 <div class="row" >
 <div class="col-md-3"></div>
@@ -92,21 +191,20 @@ button:hover {
     <div class="Jumbotron">
 
     
-      <form id="regForm" method="post" name="rideDetails" onSubmit="if(!confirm('Is the Email and Phone Number filled correctly?')){return false;}" action="http://yayataxis.com/request-for-quote/">
+      <form id="regForm" method="post" name="rideDetails" action="http://yayataxis.com/my-booking-info/">
 
-            <h1 style="text-align: center;">Ride Details</h1>	
-            <!-- One "tab" for each step in the form: -->
+            
 
 
             <!-- Page 1 strat -->
             <div class="tab">
-              <h2>Ride Details</h2>
+            <h2 style="font-size: 40px; font-weight: bold; text-align: center;">Ride Details</h2>
 
               
 
               <label>Pickup Date</label>
 
-              <p><input type="date" oninput="this.className = ''" id="date" max="2030-12-31" min="<?php echo date("Y-m-d");?>" name="pickupdate"> (Today:  <?php echo date("m-d-Y");?>)</p>  
+              <p><input type="date" oninput="this.className = ''" id="date" max="2030-12-31" min="<?php echo date("Y-m-d");?>" name="pickupdate"><span class="currentdate" style="font-weight: 400px;font-size:11px; color:#f8cf2c" >(Today:  <?php echo date("m-d-Y");?>)</span></p>  
               
 
 
@@ -119,7 +217,7 @@ button:hover {
               <label>Pickup Location</label>
               
                   <select class="form-control" name="pickUpLocation" id="pickUpLocation">
-                          <option value="Ampara">Ampara</option>
+                          <!-- <option value="Ampara">Ampara</option>
                           <option value="Anuradhapura">Anuradhapura</option>
                           <option value="Badulla">Badulla</option>
                           <option value="Batticaloa">Batticaloa</option>
@@ -142,7 +240,23 @@ button:hover {
                           <option value="Puttalam">Puttalam</option>
                           <option value="Ratnapura">Ratnapura</option>
                           <option value="Trincomalee">Trincomalee</option>
-                          <option value="Vavuniya">Vavuniya</option>
+                          <option value="Vavuniya">Vavuniya</option> -->
+                          <option value="Johor">Johor</option>
+                          <option value="Kedah">Kedah</option>
+                          <option value="Kelantan">Kelantan</option>
+                          <option value="Kuala Lumpur">Kuala Lumpur</option>
+                          <option value="Melaka">Melaka</option>
+                          <option value="Negeri Sembilan">Negeri Sembilan</option>
+                          <option value="	Pahang">Pahang</option>
+                          <option value="	Penang">Penang</option>
+                          <option value="	Perak">Perak</option>
+                          <option value="Perlis">Perlis</option>
+                          <option value="Putrajaya">Putrajaya</option>
+                          <option value="Selangor">Selangor</option>
+                          <option value="Terengganu">Terengganu</option>
+                          <option value="Labuan">Labuan</option>
+                          <option value="Saban">Saban</option>
+                          <option value="Sarawak">Sarawak</option>
 
                   </select>
               </p>
@@ -152,7 +266,7 @@ button:hover {
                       
                     <select class="form-control" name="dorpOffLocation" id="dorpOffLocation">
 
-                          <option value="Ampara">Ampara</option>
+                          <!-- <option value="Ampara">Ampara</option>
                           <option value="Anuradhapura">Anuradhapura</option>
                           <option value="Badulla">Badulla</option>
                           <option value="Batticaloa">Batticaloa</option>
@@ -175,7 +289,23 @@ button:hover {
                           <option value="Puttalam">Puttalam</option>
                           <option value="Ratnapura">Ratnapura</option>
                           <option value="Trincomalee">Trincomalee</option>
-                          <option value="Vavuniya">Vavuniya</option>
+                          <option value="Vavuniya">Vavuniya</option> -->
+                          <option value="Johor">Johor</option>
+                          <option value="Kedah">Kedah</option>
+                          <option value="Kelantan">Kelantan</option>
+                          <option value="Kuala Lumpur">Kuala Lumpur</option>
+                          <option value="Melaka">Melaka</option>
+                          <option value="Negeri Sembilan">Negeri Sembilan</option>
+                          <option value="	Pahang">Pahang</option>
+                          <option value="	Penang">Penang</option>
+                          <option value="	Perak">Perak</option>
+                          <option value="Perlis">Perlis</option>
+                          <option value="Putrajaya">Putrajaya</option>
+                          <option value="Selangor">Selangor</option>
+                          <option value="Terengganu">Terengganu</option>
+                          <option value="Labuan">Labuan</option>
+                          <option value="Saban">Saban</option>
+                          <option value="Sarawak">Sarawak</option>
 
                     </select>
               </p>
@@ -186,7 +316,8 @@ button:hover {
 
             <!-- Page 2 Start -->
             <div class="tab">
-              <h2>Choose Vehical</h2>
+              
+              <h2 style="font-size: 40px; font-weight: bold; text-align: center;">Choose Vehicle</h2>
               <p>
                 <label>Number of Passenger:</label>
 
@@ -218,11 +349,11 @@ button:hover {
                     </select>
               </p>
 
-                      <input type="button" name="select" value="Select Vehical" onclick="myFunction()" /> 
+                      <input type="button" class="selectvehicle" name="select" value="Select Vehicle" onclick="myFunction()" /> 
 
                       <script type="text/javascript">
                           $(document).ready(function() {
-                              document.getElementById("vehicalTable").style.display = "none";
+                              document.getElementById("vehicleTable").style.display = "none";
                               
                             });
                               function vehicle(){
@@ -235,7 +366,7 @@ button:hover {
                                   
                               }
                           function myFunction(){
-                            var x = document.getElementById("vehicalTable");
+                            var x = document.getElementById("vehicleTable");
 
                               if (x.style.display === "none") {
                                 x.style.display = "block";
@@ -245,7 +376,7 @@ button:hover {
                           }
                       </script>
 
-                      <div id="vehicalTable">
+                      <div id="vehicleTable">
 
                         <table class="table table-dark">
 
@@ -256,7 +387,7 @@ button:hover {
                                 <th scope="col">Price</th>
                                 <th scope="col">Max Passengers</th>
                                 <th scope="col">Max Suitcases</th>
-                                <th scope="col">Select Vehical</th>
+                                <th scope="col">Select Vehicle</th>
                               </tr>
                           </thead>
                     
@@ -268,7 +399,7 @@ button:hover {
                               <td>20000</td>
                               <td>4</td>
                               <td>3</td>
-                              <td><input type="radio" value="Car" name="selectVehical" required></td>
+                              <td><input type="radio" value="Car" name="selectVehicle" required></td>
                             </tr>
 
                             <tr>
@@ -277,7 +408,7 @@ button:hover {
                               <td>35000</td>
                               <td>8</td>
                               <td>10</td>
-                              <td><input type="radio" value="Van" name="selectVehical"></td>
+                              <td><input type="radio" value="Van" name="selectVehicle"></td>
                             </tr>
 
                             <tr>
@@ -286,7 +417,7 @@ button:hover {
                               <td>45000</td>
                               <td>30</td>
                               <td>20</td>
-                              <td><input type="radio" value="Bus" name="selectVehical"></td>
+                              <td><input type="radio" value="Bus" name="selectVehicle"></td>
                             </tr>
                             
                           </tbody>
@@ -305,11 +436,12 @@ button:hover {
 
             <!-- Page 3 Start -->
             <div class="tab">
-              <h2>Contact Details</h2>
+              
+              <h2 style="font-size: 40px; font-weight: bold; text-align: center;">Contact Details</h2>
               
               <div>
 
-                <div class="row" style="margin-top: 30px;">
+                <div class="row contactrow" style="margin-top: 30px;">
                   <div class="col-md-6">
                     <label>First Name</label>
                     <input name="firstname" type="text" class="form-control">  
@@ -320,7 +452,7 @@ button:hover {
                   </div>  
                 </div>
 
-                <div class="row">
+                <div class="row contactrow">
                   <div class="col-md-6">
                     <label>Email</label>
                     <input type="email" name="email" id="email" placeholder="Ex:example@gmail.com"  required/>
@@ -332,7 +464,7 @@ button:hover {
                   </div>    
                 </div>
 
-                <div class="row">
+                <div class="row contactrow">
                   <div class="col-md-6">
                     <label>Country</label>
                     
@@ -369,10 +501,10 @@ button:hover {
                   </div>  
                 </div>
 
-                <div class="row" style="margin-top: 40px;">
+                <div class="row" style="margin-top: -20px;">
                   <div class="col-md-12">
                     <label style="margin-top: 0px;">Comments</label>
-                    <textarea name="comments" rows="5" cols="100%">
+                    <textarea name="comments" rows="5" cols="50">
                     </textarea>
                   </div>
                 </div>
@@ -385,18 +517,18 @@ button:hover {
             <!-- Page 4 Start -->
             <div class="tab">
 
-              <h2>Payment Details</h2>
+              <h2 style="font-size: 40px; font-weight: bold; text-align: center;">Payment Details</h2>
 
               <div class="custom-control custom-radio">
 
                   <div class="row">
 
                       <div class="col-md-8">
-                        <label class="custom-control-label">Card Payment</label>
+                        <label class="custom-control-label">Deposit to Bank</label>
                       </div>
 
                       <div class="col-md-1">
-                        <input type="radio" class="custom-control-input" id="cardpayment" value="CardPayment" name="payment" checked>
+                        <input type="radio" class="custom-control-input" id="cardpayment" value="DeposittoBank" name="payment" checked>
                       </div>
 
                       <div class="col-md-3">
@@ -408,7 +540,7 @@ button:hover {
                   <div class="row">
 
                       <div class="col-md-8">
-                        <label class="custom-control-label" >Deposit to Bank / Direct Transfer</label>
+                        <label class="custom-control-label" >Direct Transfer</label>
                       </div>
 
                       <div class="col-md-1">
@@ -425,34 +557,48 @@ button:hover {
 
                       <div class="col-md-4"></div>
 
-                      <div class="col-md-4">
-                          <input type="submit" name="submit" id="allData" value="Submit" onclick="ClickButton() validate()" >
+                      <div class="col-md-4 submitButton">
+                          <input type="submit" name="submitvalue"   class="formSubmit" id="allData" value="Submit" onclick="ClickButton(); ValidateEmail(document.rideDetails.email)" >
                       </div>
 
                           <script type="text/javascript">
 
                               function ClickButton() {
 
-                                var a = document.forms["rideDetails"]["selectVehical"].value;
+                                var a = document.forms["rideDetails"]["selectVehicle"].value;
                                 
                                 if (a == null || a == "") {
-                                  alert("Please Select vehical");
+                                  alert("Please Select Vehicle");
                                   return false;
                                 }
 
 
                               }
 
-                              function validate(form) {
+                              // function validate() {
+                              //   var b= document.forms["rideDetails"]["email"].value;
+                              //   var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-                                if(!valid) {
-                                    alert('Please correct the errors in the form!');
-                                    return false;
+                              //   if(b==null||){
+                                  
+                              //   }
+                              // }
+
+                              function ValidateEmail(inputText)
+                              {
+                                  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                                  if(inputText.value.match(mailformat))
+                                {
+                                  document.rideDetails.email.focus();
+                                  return true;
                                 }
-                                else {
-                                    return confirm('Do you really want to submit the form?');
+                                else
+                                {
+                                  alert("You have entered an invalid email address!");
+                                  document.rideDetails.email.focus();
+                                  return false;
                                 }
-                              }
+                              }   
 
 
                           </script>
@@ -474,6 +620,7 @@ button:hover {
               <div style="float:right;">
                 <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
                 <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                
               </div>
             </div>
 
@@ -512,6 +659,7 @@ button:hover {
           //... and fix the Previous/Next buttons:
           if (n == 0) {
             document.getElementById("prevBtn").style.display = "none";
+            document.getElementById("allData").style.display = "none";
           } else {
             document.getElementById("prevBtn").style.display = "inline";
           }
@@ -520,6 +668,7 @@ button:hover {
             document.getElementById("nextBtn").style.display = "none";;
           } else {
             document.getElementById("nextBtn").style.display = "inline";
+            document.getElementById("allData").style.display = "inline";
           }
           //... and run a function that will display the correct step indicator:
 
